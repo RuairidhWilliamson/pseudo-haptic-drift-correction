@@ -1,0 +1,239 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: QuestController_R
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: ca46f3cb3677955429e17d63c8354116, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_UseReference
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_Name
+    value: Position
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_Type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_ExpectedControlType
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_Id
+    value: 03e8228b-946b-4cca-b120-b7c5d9df8337
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_SingletonActionBindings.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Name
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Id
+    value: 436d875d-55a8-4a54-afef-a92ff43663cb
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Path
+    value: <XRController>{RightHand}/devicePosition
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Groups
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Action
+    value: Position
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionAction.m_Reference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_UseReference
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_Name
+    value: Rotation
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_Type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_ExpectedControlType
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_Id
+    value: 5b040161-254c-4090-b5b2-f0538223c912
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_SingletonActionBindings.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Name
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Id
+    value: 4a29d760-9d24-4b1e-8aef-8bca9997d36f
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Path
+    value: <XRController>{RightHand}/deviceRotation
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Groups
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Action
+    value: Rotation
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationAction.m_Reference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_UseReference
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_Name
+    value: Grab
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_Type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_ExpectedControlType
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_Id
+    value: 3d24964a-2f76-457a-8064-f7dfb7fa1813
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_SingletonActionBindings.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Name
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Id
+    value: 3a11db8a-b451-41ac-8999-3bd74caa187a
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Path
+    value: <XRController>{RightHand}/primaryButton
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Groups
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Action
+    value: Grab
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grabAction.m_Reference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: visualPrefab
+    value: 
+    objectReference: {fileID: -8679921383154817045, guid: 2cf3058dc53c6684698c3d3e91de21fc, type: 3}
+  - target: {fileID: 0}
+    propertyPath: grabRadius
+    value: 0.1
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
