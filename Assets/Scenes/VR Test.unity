@@ -1853,6 +1853,7 @@ MonoBehaviour:
   rig: {fileID: 1904334868}
   recenterButton: 1
   resetObjectsButton: 0
+  resetDriftButton: 0
 --- !u!114 &1401527422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1874,8 +1875,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   rig: {fileID: 1904334868}
-  recenterButton: 1
+  recenterButton: 0
   resetObjectsButton: 1
+  resetDriftButton: 1
 --- !u!1 &1421044648
 GameObject:
   m_ObjectHideFlags: 0
@@ -1886,6 +1888,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1421044650}
   - component: {fileID: 1421044649}
+  - component: {fileID: 1421044651}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1915,8 +1918,8 @@ Light:
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_Bias: 1
+    m_NormalBias: 1
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -1954,7 +1957,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
-  m_ShadowAngle: 0
+  m_ShadowAngle: 10.3
 --- !u!4 &1421044650
 Transform:
   m_ObjectHideFlags: 0
@@ -1969,6 +1972,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 71.164, y: -30, z: 0}
+--- !u!114 &1421044651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421044648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePipelineSettings: 1
 --- !u!1 &1491062350
 GameObject:
   m_ObjectHideFlags: 0
@@ -2775,6 +2791,7 @@ MonoBehaviour:
   rig: {fileID: 1904334868}
   recenterButton: 1
   resetObjectsButton: 0
+  resetDriftButton: 0
 --- !u!114 &1967695317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2797,7 +2814,8 @@ MonoBehaviour:
     m_Bits: 256
   rig: {fileID: 1904334868}
   recenterButton: 1
-  resetObjectsButton: 1
+  resetObjectsButton: 0
+  resetDriftButton: 1
 --- !u!1 &1993535322
 GameObject:
   m_ObjectHideFlags: 0

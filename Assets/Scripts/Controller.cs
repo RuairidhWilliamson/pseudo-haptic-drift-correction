@@ -26,6 +26,8 @@ public class Controller : MonoBehaviour
     [SerializeField] private bool recenterButton;
     [SerializeField] private bool resetObjectsButton;
 
+    [SerializeField] private bool resetDriftButton;
+
     protected Vector3 RealPosition;
     protected Quaternion RealRotation;
     protected Vector3 VirtualPosition;
@@ -35,7 +37,8 @@ public class Controller : MonoBehaviour
 
     private bool _grabDown;
     private bool _recenterDown;
-    private bool _resetDown;
+    private bool _resetObjectsDown;
+    private bool _resetDriftDown;
     protected Vector3 _grabPositionOffset;
     protected Quaternion _grabRotationOffset;
 
@@ -50,6 +53,8 @@ public class Controller : MonoBehaviour
         _visual = Instantiate(visualPrefab, transform);
         InputDevices.deviceConnected += DeviceConnected;
         UpdateDevice();
+        // Reset drift once all setup so that we start with no drift
+        Invoke(nameof(ResetDrift), 1f);
     }
 
     private void DeviceConnected(InputDevice device)
@@ -104,7 +109,7 @@ public class Controller : MonoBehaviour
 
     protected bool GetRecenter()
     {
-        bool down = recenterButton && _device.isValid && _device.TryGetFeatureValue(CommonUsages.primaryButton, out bool value) && value;
+        bool down = recenterButton && _device.isValid && _device.TryGetFeatureValue(CommonUsages.secondaryButton, out bool value) && value;
         if (!_recenterDown && down)
         {
             _recenterDown = true;
@@ -117,19 +122,34 @@ public class Controller : MonoBehaviour
         return false;
     }
 
+    protected bool GetResetDrift()
+    {
+        bool down = resetDriftButton && _device.isValid && _device.TryGetFeatureValue(CommonUsages.primaryButton, out bool value) && value;
+        if (!_resetDriftDown && down)
+        {
+            _resetDriftDown = true;
+            return true;
+        }
+        if (_resetDriftDown && !down)
+        {
+            _resetDriftDown = false;
+        }
+        return false;
+    }
+
     protected bool GetResetObjects()
     {
         bool down = resetObjectsButton && _device.isValid &&
                     _device.TryGetFeatureValue(CommonUsages.secondaryButton, out bool value) && value;
-        if (!_resetDown && down)
+        if (!_resetObjectsDown && down)
         {
-            _resetDown = true;
+            _resetObjectsDown = true;
             return true;
         }
 
-        if (_resetDown && !down)
+        if (_resetObjectsDown && !down)
         {
-            _resetDown = false;
+            _resetObjectsDown = false;
         }
         return false;
     }
@@ -146,6 +166,11 @@ public class Controller : MonoBehaviour
         if (GetResetObjects())
         {
             ObjectManager.ResetObjects();
+        }
+
+        if (GetResetDrift())
+        {
+            ResetDrift();
         }
         if (GetGrab())
         {
@@ -194,6 +219,12 @@ public class Controller : MonoBehaviour
         UpdateVirtual();
         UpdateRepresentation();
         UpdateHolding();
+    }
+
+    protected virtual void ResetDrift()
+    {
+        VirtualPosition = RealPosition;
+        VirtualRotation = RealRotation;
     }
 
     private void Grab()
