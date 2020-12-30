@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,26 +18,35 @@ public class Controller : MonoBehaviour
     private InputDevice _device;
     
     [SerializeField] private Transform visualPrefab;
-    [SerializeField] private float grabRadius = 0.05f;
+    [SerializeField] private Transform realPrefab;
+    [SerializeField] private bool showReal;
+    [SerializeField] private float grabRadius = 0.1f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private XRRig rig;
     [SerializeField] private bool recenterButton;
+    [SerializeField] private bool resetObjectsButton;
 
     protected Vector3 RealPosition;
     protected Quaternion RealRotation;
     protected Vector3 VirtualPosition;
-    protected Quaternion VirtualRotation;
+    protected Quaternion VirtualRotation = Quaternion.identity;
+    
     protected float ControlDisplayRatio = 1f;
 
     private bool _grabDown;
     private bool _recenterDown;
+    private bool _resetDown;
+    protected Vector3 _grabPositionOffset;
+    protected Quaternion _grabRotationOffset;
 
+    private Transform _realRepresentation;
     private Transform _visual;
     private readonly Collider[] _colliders = new Collider[5];
     private Rigidbody _holding;
 
     private void Start()
     {
+        _realRepresentation = Instantiate(realPrefab, transform);
         _visual = Instantiate(visualPrefab, transform);
         InputDevices.deviceConnected += DeviceConnected;
         UpdateDevice();
@@ -106,15 +116,36 @@ public class Controller : MonoBehaviour
         }
         return false;
     }
+
+    protected bool GetResetObjects()
+    {
+        bool down = resetObjectsButton && _device.isValid &&
+                    _device.TryGetFeatureValue(CommonUsages.secondaryButton, out bool value) && value;
+        if (!_resetDown && down)
+        {
+            _resetDown = true;
+            return true;
+        }
+
+        if (_resetDown && !down)
+        {
+            _resetDown = false;
+        }
+        return false;
+    }
     
     protected void ProcessInput()
     {
-        RealPosition = GetPosition();
+        RealPosition = transform.TransformPoint(GetPosition());
         RealRotation = GetRotation();
         if (GetRecenter())
         {
             rig.cameraFloorOffsetObject.transform.position = -rig.cameraGameObject.transform.localPosition;
             rig.cameraFloorOffsetObject.transform.position -= Vector3.up * Vector3.Dot(rig.cameraFloorOffsetObject.transform.position, Vector3.up);
+        }
+        if (GetResetObjects())
+        {
+            ObjectManager.ResetObjects();
         }
         if (GetGrab())
         {
@@ -128,10 +159,23 @@ public class Controller : MonoBehaviour
 
     protected virtual void UpdateVirtual()
     {
-        VirtualPosition = transform.TransformPoint(RealPosition);
+        VirtualPosition = RealPosition;
         VirtualRotation = RealRotation;
+    }
+
+    protected virtual void UpdateRepresentation()
+    {
         _visual.position = VirtualPosition;
-        _visual.localRotation = VirtualRotation;
+        _visual.localRotation = VirtualRotation.normalized;
+        if (showReal)
+        {
+            _realRepresentation.position = RealPosition;
+            _realRepresentation.localRotation = RealRotation.normalized;
+        }
+        else
+        {
+            _realRepresentation.position = Vector3.one * -100f;
+        }
     }
 
     protected virtual void UpdateHolding()
@@ -139,8 +183,8 @@ public class Controller : MonoBehaviour
         if (_holding)
         {
             _holding.isKinematic = true;
-            _holding.position = VirtualPosition;
-            _holding.rotation = VirtualRotation;
+            _holding.position = VirtualPosition + _grabPositionOffset;
+            _holding.rotation = VirtualRotation.normalized * _grabRotationOffset;
         }
     }
 
@@ -148,6 +192,7 @@ public class Controller : MonoBehaviour
     {
         ProcessInput();
         UpdateVirtual();
+        UpdateRepresentation();
         UpdateHolding();
     }
 
@@ -155,6 +200,7 @@ public class Controller : MonoBehaviour
     {
         if (_holding) return;
         int size = Physics.OverlapSphereNonAlloc(VirtualPosition, grabRadius, _colliders, layerMask);
+        // Find closest pickupable object within range
         float smallestDistance = Mathf.Infinity;
         Collider closestObject = null;
         for (int i = 0; i < size; i++)
@@ -166,11 +212,14 @@ public class Controller : MonoBehaviour
                 closestObject = _colliders[i];
             }
         }
+        // If we found an object to pickup, pick it up
         if (size > 0 && closestObject != null)
         {
             _holding = closestObject.attachedRigidbody;
             ControlDisplayRatio = 1f / _holding.mass;
             _holding.isKinematic = true;
+            _grabPositionOffset = _holding.position - VirtualPosition;
+            _grabRotationOffset = Quaternion.Inverse(VirtualRotation) * _holding.rotation;
         }
     }
 
@@ -179,5 +228,6 @@ public class Controller : MonoBehaviour
         if (!_holding) return;
         _holding.isKinematic = false;
         _holding = null;
+        ControlDisplayRatio = 1f;
     }
 }
