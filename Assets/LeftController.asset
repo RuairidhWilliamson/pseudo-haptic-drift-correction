@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8a214efc0fdb14996f48262f9a85a3, type: 3}
+  m_Name: LeftController
+  m_EditorClassIdentifier: 
+  controllerNode: 4
+  visualPrefab: {fileID: -8679921383154817045, guid: 0b272b37916c0c245a5da1bb728c1bd5, type: 3}
+  realPrefab: {fileID: -8679921383154817045, guid: 0b272b37916c0c245a5da1bb728c1bd5, type: 3}

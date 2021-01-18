@@ -1809,6 +1809,7 @@ GameObject:
   - component: {fileID: 1401527420}
   - component: {fileID: 1401527421}
   - component: {fileID: 1401527422}
+  - component: {fileID: 1401527423}
   m_Layer: 0
   m_Name: LeftHand Controller new
   m_TagString: Untagged
@@ -1842,9 +1843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca46f3cb3677955429e17d63c8354116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerNode: 4
-  visualPrefab: {fileID: -8679921383154817045, guid: 0b272b37916c0c245a5da1bb728c1bd5, type: 3}
-  realPrefab: {fileID: -8679921383154817045, guid: 0b272b37916c0c245a5da1bb728c1bd5, type: 3}
+  _controllerData: {fileID: 11400000, guid: e5c215642c2881640bebc2e21fae9bbc, type: 2}
   showReal: 0
   grabRadius: 0.1
   layerMask:
@@ -1866,10 +1865,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7958ef7b88c1242b55d3373d24cb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerNode: 4
-  visualPrefab: {fileID: -8679921383154817045, guid: 0b272b37916c0c245a5da1bb728c1bd5, type: 3}
-  realPrefab: {fileID: -8679921383154817045, guid: 0b272b37916c0c245a5da1bb728c1bd5, type: 3}
-  showReal: 1
+  _controllerData: {fileID: 11400000, guid: e5c215642c2881640bebc2e21fae9bbc, type: 2}
+  showReal: 0
+  grabRadius: 0.1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  rig: {fileID: 1904334868}
+  recenterButton: 0
+  resetObjectsButton: 1
+  resetDriftButton: 1
+--- !u!114 &1401527423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401527419}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a5d330a4bba78489ce3f0bfd512b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controllerData: {fileID: 11400000, guid: e5c215642c2881640bebc2e21fae9bbc, type: 2}
+  showReal: 0
   grabRadius: 0.1
   layerMask:
     serializedVersion: 2
@@ -2747,6 +2766,7 @@ GameObject:
   - component: {fileID: 1967695315}
   - component: {fileID: 1967695316}
   - component: {fileID: 1967695317}
+  - component: {fileID: 1967695318}
   m_Layer: 0
   m_Name: RightHand Controller new
   m_TagString: Untagged
@@ -2780,9 +2800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca46f3cb3677955429e17d63c8354116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerNode: 5
-  visualPrefab: {fileID: -8679921383154817045, guid: 2cf3058dc53c6684698c3d3e91de21fc, type: 3}
-  realPrefab: {fileID: -8679921383154817045, guid: 2cf3058dc53c6684698c3d3e91de21fc, type: 3}
+  _controllerData: {fileID: 11400000, guid: b4ca4535e88ee354ba9aaaa24a842714, type: 2}
   showReal: 0
   grabRadius: 0.1
   layerMask:
@@ -2804,10 +2822,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7958ef7b88c1242b55d3373d24cb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerNode: 5
-  visualPrefab: {fileID: -8679921383154817045, guid: 2cf3058dc53c6684698c3d3e91de21fc, type: 3}
-  realPrefab: {fileID: -8679921383154817045, guid: 2cf3058dc53c6684698c3d3e91de21fc, type: 3}
-  showReal: 1
+  _controllerData: {fileID: 11400000, guid: b4ca4535e88ee354ba9aaaa24a842714, type: 2}
+  showReal: 0
+  grabRadius: 0.1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  rig: {fileID: 1904334868}
+  recenterButton: 1
+  resetObjectsButton: 0
+  resetDriftButton: 1
+--- !u!114 &1967695318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967695314}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a5d330a4bba78489ce3f0bfd512b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controllerData: {fileID: 11400000, guid: b4ca4535e88ee354ba9aaaa24a842714, type: 2}
+  showReal: 0
   grabRadius: 0.1
   layerMask:
     serializedVersion: 2

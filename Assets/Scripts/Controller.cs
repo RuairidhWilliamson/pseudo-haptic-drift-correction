@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using CommonUsages = UnityEngine.XR.CommonUsages;
@@ -13,12 +6,8 @@ using InputDevice = UnityEngine.XR.InputDevice;
 
 public class Controller : MonoBehaviour
 {
-    
-    [SerializeField] private XRNode controllerNode = XRNode.RightHand;
+    [SerializeField] private ControllerData _controllerData;
     private InputDevice _device;
-    
-    [SerializeField] private Transform visualPrefab;
-    [SerializeField] private Transform realPrefab;
     [SerializeField] private bool showReal;
     [SerializeField] private float grabRadius = 0.1f;
     [SerializeField] private LayerMask layerMask;
@@ -49,8 +38,8 @@ public class Controller : MonoBehaviour
 
     private void Start()
     {
-        _realRepresentation = Instantiate(realPrefab, transform);
-        _visual = Instantiate(visualPrefab, transform);
+        _realRepresentation = Instantiate(_controllerData.realPrefab, transform);
+        _visual = Instantiate(_controllerData.visualPrefab, transform);
         InputDevices.deviceConnected += DeviceConnected;
         UpdateDevice();
         // Reset drift once all setup so that we start with no drift
@@ -64,7 +53,7 @@ public class Controller : MonoBehaviour
 
     private void UpdateDevice()
     {
-        _device = InputDevices.GetDeviceAtXRNode(controllerNode);
+        _device = InputDevices.GetDeviceAtXRNode(_controllerData.controllerNode);
     }
 
     protected Vector3 GetPosition()
@@ -227,7 +216,7 @@ public class Controller : MonoBehaviour
         VirtualRotation = RealRotation;
     }
 
-    private void Grab()
+    protected virtual void Grab()
     {
         if (_holding) return;
         int size = Physics.OverlapSphereNonAlloc(VirtualPosition, grabRadius, _colliders, layerMask);
@@ -254,7 +243,7 @@ public class Controller : MonoBehaviour
         }
     }
 
-    private void Release()
+    protected virtual void Release()
     {
         if (!_holding) return;
         _holding.isKinematic = false;
