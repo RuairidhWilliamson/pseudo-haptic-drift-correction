@@ -9,10 +9,17 @@
         <e p="Scripts" t="Include">
           <e p="Controller.cs" t="Include" />
           <e p="ControllerData.cs" t="Include" />
+          <e p="Controllers" t="Include">
+            <e p="NonPseudoHaptic.cs" t="Include" />
+            <e p="RealignOnButton.cs" t="Include" />
+            <e p="RealignOnRelease.cs" t="Include" />
+            <e p="SlowRealignContinuous.cs" t="Include" />
+            <e p="SlowRealignOnRelease.cs" t="Include" />
+          </e>
+          <e p="CorrecterManager.cs" t="Include" />
           <e p="MousePickupManager.cs" t="Include" />
           <e p="ObjectManager.cs" t="Include" />
           <e p="PseudoHapticController.cs" t="Include" />
-          <e p="RealignOnRelease.cs" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">

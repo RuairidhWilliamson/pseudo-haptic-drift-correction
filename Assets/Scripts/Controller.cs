@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using CommonUsages = UnityEngine.XR.CommonUsages;
@@ -6,16 +7,8 @@ using InputDevice = UnityEngine.XR.InputDevice;
 
 public class Controller : MonoBehaviour
 {
-    [SerializeField] private ControllerData _controllerData;
+    private ControllerData _controllerData;
     private InputDevice _device;
-    [SerializeField] private bool showReal;
-    [SerializeField] private float grabRadius = 0.1f;
-    [SerializeField] private LayerMask layerMask;
-    [SerializeField] private XRRig rig;
-    [SerializeField] private bool recenterButton;
-    [SerializeField] private bool resetObjectsButton;
-
-    [SerializeField] private bool resetDriftButton;
 
     protected Vector3 RealPosition;
     protected Quaternion RealRotation;
@@ -34,16 +27,29 @@ public class Controller : MonoBehaviour
     private Transform _realRepresentation;
     private Transform _visual;
     private readonly Collider[] _colliders = new Collider[5];
-    private Rigidbody _holding;
+    protected Rigidbody _holding;
+
 
     private void Start()
     {
+        _controllerData = GetComponent<ControllerData>();
         _realRepresentation = Instantiate(_controllerData.realPrefab, transform);
         _visual = Instantiate(_controllerData.visualPrefab, transform);
         InputDevices.deviceConnected += DeviceConnected;
         UpdateDevice();
         // Reset drift once all setup so that we start with no drift
         Invoke(nameof(ResetDrift), 1f);
+    }
+
+    private void OnEnable()
+    {
+        ResetDrift();
+    }
+
+    private void OnDisable()
+    {
+        _realRepresentation.position = Vector3.one * -100f;
+        _visual.position = Vector3.one * -100f;
     }
 
     private void DeviceConnected(InputDevice device)
@@ -98,7 +104,7 @@ public class Controller : MonoBehaviour
 
     protected bool GetRecenter()
     {
-        bool down = recenterButton && _device.isValid && _device.TryGetFeatureValue(CommonUsages.secondaryButton, out bool value) && value;
+        bool down = _controllerData.recenterButton && _device.isValid && _device.TryGetFeatureValue(CommonUsages.secondaryButton, out bool value) && value;
         if (!_recenterDown && down)
         {
             _recenterDown = true;
@@ -113,7 +119,7 @@ public class Controller : MonoBehaviour
 
     protected bool GetResetDrift()
     {
-        bool down = resetDriftButton && _device.isValid && _device.TryGetFeatureValue(CommonUsages.primaryButton, out bool value) && value;
+        bool down = _controllerData.resetDriftButton && _device.isValid && _device.TryGetFeatureValue(CommonUsages.primaryButton, out bool value) && value;
         if (!_resetDriftDown && down)
         {
             _resetDriftDown = true;
@@ -128,7 +134,7 @@ public class Controller : MonoBehaviour
 
     protected bool GetResetObjects()
     {
-        bool down = resetObjectsButton && _device.isValid &&
+        bool down = _controllerData.resetObjectsButton && _device.isValid &&
                     _device.TryGetFeatureValue(CommonUsages.secondaryButton, out bool value) && value;
         if (!_resetObjectsDown && down)
         {
@@ -149,8 +155,9 @@ public class Controller : MonoBehaviour
         RealRotation = GetRotation();
         if (GetRecenter())
         {
-            rig.cameraFloorOffsetObject.transform.position = -rig.cameraGameObject.transform.localPosition;
-            rig.cameraFloorOffsetObject.transform.position -= Vector3.up * Vector3.Dot(rig.cameraFloorOffsetObject.transform.position, Vector3.up);
+            Vector3 position = -_controllerData.rig.cameraGameObject.transform.localPosition;
+            position -= Vector3.up * Vector3.Dot(position, Vector3.up);
+            _controllerData.rig.cameraFloorOffsetObject.transform.position = position;
         }
         if (GetResetObjects())
         {
@@ -181,7 +188,7 @@ public class Controller : MonoBehaviour
     {
         _visual.position = VirtualPosition;
         _visual.localRotation = VirtualRotation.normalized;
-        if (showReal)
+        if (_controllerData.showReal)
         {
             _realRepresentation.position = RealPosition;
             _realRepresentation.localRotation = RealRotation.normalized;
@@ -219,7 +226,7 @@ public class Controller : MonoBehaviour
     protected virtual void Grab()
     {
         if (_holding) return;
-        int size = Physics.OverlapSphereNonAlloc(VirtualPosition, grabRadius, _colliders, layerMask);
+        int size = Physics.OverlapSphereNonAlloc(VirtualPosition, _controllerData.grabRadius, _colliders, _controllerData.layerMask);
         // Find closest pickupable object within range
         float smallestDistance = Mathf.Infinity;
         Collider closestObject = null;
