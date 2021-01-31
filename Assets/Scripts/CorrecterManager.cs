@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.XR;
@@ -11,10 +12,11 @@ public class CorrecterManager : MonoBehaviour
     private readonly Type[] _modes =
     {
         typeof(NonPseudoHaptic), 
-        typeof(RealignOnButton), 
-        typeof(RealignOnRelease), 
+        typeof(RealignOnButton),
+        typeof(RealignOnRelease),
         typeof(SlowRealignOnRelease), 
-        typeof(SlowRealignContinuous)
+        typeof(SlowRealignContinuous),
+        typeof(SlowRealignWhenMoving)
     };
     private List<Controller> _controllers;
     [SerializeField] private GameObject[] controllersObjects;
@@ -47,12 +49,14 @@ public class CorrecterManager : MonoBehaviour
         foreach (Controller controller in _controllers)
         {
             controller.enabled = clazz.IsInstanceOfType(controller);
+            if (controller.enabled)
+            {
+                text.text = controller.Name;
+            }
         }
-
-        text.text = clazz.Name;
     }
 
-    private float GetThumbStickInput(InputDevice inputDevice)
+    private static float GetThumbStickInput(InputDevice inputDevice)
     {
         if (inputDevice.isValid &&
             inputDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 thumbStick))

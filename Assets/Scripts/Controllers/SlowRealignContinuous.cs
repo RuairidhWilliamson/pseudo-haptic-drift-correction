@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowRealignContinuous : PseudoHapticController
+namespace Controllers
 {
-    
-    private Vector3 _velocity;
-    [SerializeField] private float smoothTime = 0.1f;
-
-    protected override void UpdateVirtual()
+    public class SlowRealignContinuous : PseudoHapticController
     {
-        base.UpdateVirtual();
-        // VirtualPosition = Vector3.SmoothDamp(VirtualPosition, RealPosition, ref _velocity, smoothTime);
-        VirtualPosition = Vector3.Lerp(VirtualPosition, RealPosition, smoothTime * Time.deltaTime);
-        VirtualRotation = Quaternion.Slerp(VirtualRotation, RealRotation, smoothTime * Time.deltaTime);
+        public override string Name => "Slow Realign Continuous";
+        [SerializeField] private float smoothTime = 0.1f;
+
+        protected override void UpdateVirtual()
+        {
+            base.UpdateVirtual();
+            VirtualPosition = Vector3.Lerp(VirtualPosition, RealPosition, smoothTime * Time.deltaTime);
+            VirtualRotation = Quaternion.Slerp(VirtualRotation, RealRotation, smoothTime * Time.deltaTime);
+        }
     }
 }

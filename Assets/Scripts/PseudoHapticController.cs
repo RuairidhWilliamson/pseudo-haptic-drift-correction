@@ -7,12 +7,14 @@ public class PseudoHapticController : Controller
     
     private Vector3 _lastPosition;
     private Quaternion _lastRotation;
+    protected Vector3 deltaPosition;
+    protected Quaternion deltaRotation;
     
     protected override void UpdateVirtual()
     {
         // Find amount moved since last frame
-        Vector3 deltaPosition = RealPosition - _lastPosition;
-        Quaternion deltaRotation = RealRotation * Quaternion.Inverse(_lastRotation);
+        deltaPosition = RealPosition - _lastPosition;
+        deltaRotation = RealRotation * Quaternion.Inverse(_lastRotation);
         _lastPosition = RealPosition;
         _lastRotation = RealRotation;
 
@@ -22,5 +24,13 @@ public class PseudoHapticController : Controller
         // Apply the rotation to the grab position offset
         _grabPositionOffset = Quaternion.Slerp(Quaternion.identity, deltaRotation, ControlDisplayRatio) * _grabPositionOffset;
         VirtualRotation.Normalize();
+    }
+
+    protected override void Release()
+    {
+        if (_holding is null) return;
+        _holding.velocity = deltaPosition / Time.deltaTime;
+        // _holding.angularVelocity = deltaRotation.eulerAngles / Time.deltaTime;
+        base.Release();
     }
 }

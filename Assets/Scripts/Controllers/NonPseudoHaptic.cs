@@ -1,8 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class NonPseudoHaptic : Controller
+namespace Controllers
 {
-    
+    public class NonPseudoHaptic : PseudoHapticController
+    {
+        public override string Name => "Non Pseudo Haptic";
+
+        protected override void UpdateVirtual()
+        {
+            ResetDrift();
+            base.UpdateVirtual();
+        }
+    }
 }

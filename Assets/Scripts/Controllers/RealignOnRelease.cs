@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class RealignOnRelease : PseudoHapticController
+namespace Controllers
 {
-    protected override void Release()
+    public class RealignOnRelease : PseudoHapticController
     {
-        base.Release();
-        ResetDrift();
+        public override string Name => "Realign On Release";
+        protected override void Release()
+        {
+            base.Release();
+            ResetDrift();
+        }
     }
 }

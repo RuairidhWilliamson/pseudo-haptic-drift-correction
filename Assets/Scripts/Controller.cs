@@ -7,6 +7,7 @@ using InputDevice = UnityEngine.XR.InputDevice;
 
 public class Controller : MonoBehaviour
 {
+    public virtual string Name => "Base Controller";
     private ControllerData _controllerData;
     private InputDevice _device;
 
@@ -148,8 +149,8 @@ public class Controller : MonoBehaviour
         }
         return false;
     }
-    
-    protected void ProcessInput()
+
+    private void ProcessInput()
     {
         RealPosition = transform.TransformPoint(GetPosition());
         RealRotation = GetRotation();
@@ -158,6 +159,9 @@ public class Controller : MonoBehaviour
             Vector3 position = -_controllerData.rig.cameraGameObject.transform.localPosition;
             position -= Vector3.up * Vector3.Dot(position, Vector3.up);
             _controllerData.rig.cameraFloorOffsetObject.transform.position = position;
+            // Vector3 direction = Vector3.ProjectOnPlane(_controllerData.rig.cameraGameObject.transform.forward, Vector3.up);
+            // Quaternion rotation = Quaternion.FromToRotation(direction, Vector3.forward);
+            // _controllerData.rig.cameraFloorOffsetObject.transform.rotation *= rotation;
         }
         if (GetResetObjects())
         {
