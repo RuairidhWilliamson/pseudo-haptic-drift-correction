@@ -6,8 +6,8 @@ namespace Controllers
 
         protected override void UpdateVirtual()
         {
-            ResetDrift();
             base.UpdateVirtual();
+            ResetDrift();
         }
     }
 }

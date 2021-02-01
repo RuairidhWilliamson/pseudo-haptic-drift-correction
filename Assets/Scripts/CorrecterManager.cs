@@ -14,9 +14,12 @@ public class CorrecterManager : MonoBehaviour
         typeof(NonPseudoHaptic), 
         typeof(RealignOnButton),
         typeof(RealignOnRelease),
+        typeof(RealignWhenOutOfView),
         typeof(SlowRealignOnRelease), 
         typeof(SlowRealignContinuous),
-        typeof(SlowRealignWhenMoving)
+        typeof(SlowRealignWhenMoving),
+        typeof(SlowRealignWhenOutOfView),
+        typeof(SlowRealignWhenMovingAndRealignWhenOutOfView)
     };
     private List<Controller> _controllers;
     [SerializeField] private GameObject[] controllersObjects;

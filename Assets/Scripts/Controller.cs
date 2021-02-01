@@ -31,7 +31,7 @@ public class Controller : MonoBehaviour
     protected Rigidbody _holding;
 
 
-    private void Start()
+    protected virtual void Start()
     {
         _controllerData = GetComponent<ControllerData>();
         _realRepresentation = Instantiate(_controllerData.realPrefab, transform);
@@ -159,6 +159,8 @@ public class Controller : MonoBehaviour
             Vector3 position = -_controllerData.rig.cameraGameObject.transform.localPosition;
             position -= Vector3.up * Vector3.Dot(position, Vector3.up);
             _controllerData.rig.cameraFloorOffsetObject.transform.position = position;
+            var _hmd = InputDevices.GetDeviceAtXRNode(XRNode.Head);
+            
             // Vector3 direction = Vector3.ProjectOnPlane(_controllerData.rig.cameraGameObject.transform.forward, Vector3.up);
             // Quaternion rotation = Quaternion.FromToRotation(direction, Vector3.forward);
             // _controllerData.rig.cameraFloorOffsetObject.transform.rotation *= rotation;

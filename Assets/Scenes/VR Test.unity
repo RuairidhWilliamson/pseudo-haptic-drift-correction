@@ -2190,9 +2190,12 @@ GameObject:
   - component: {fileID: 1401527422}
   - component: {fileID: 1401527421}
   - component: {fileID: 1401527423}
+  - component: {fileID: 1401527429}
   - component: {fileID: 1401527424}
   - component: {fileID: 1401527425}
   - component: {fileID: 1401527427}
+  - component: {fileID: 1401527428}
+  - component: {fileID: 1401527430}
   m_Layer: 0
   m_Name: LeftHand Controller new
   m_TagString: Untagged
@@ -2262,7 +2265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab65c90579b1bb4d88dafb813df4843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTime: 0.5
+  smoothTime: 0.7
 --- !u!114 &1401527425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2275,7 +2278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13ba9d31303b2a4c9f06edf0f7dd8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTime: 0.5
+  smoothTime: 0.7
 --- !u!114 &1401527426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2312,7 +2315,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b07d125f547ba41974fb98397b9858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTime: 0.5
+  smoothTime: 0.7
+  speedThreshold: 0.5
+--- !u!114 &1401527428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401527419}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab677361de94184c96d5dbbedc1289c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothTime: 0.7
+--- !u!114 &1401527429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401527419}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c29054ecc1bddf41aa6967743ac78fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1401527430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401527419}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 027d9acc1d13be84db973ab79788d0d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothTime: 0.7
   speedThreshold: 0.5
 --- !u!1 &1421044648
 GameObject:
@@ -3261,9 +3303,12 @@ GameObject:
   - component: {fileID: 1967695317}
   - component: {fileID: 1967695316}
   - component: {fileID: 1967695318}
+  - component: {fileID: 1967695324}
   - component: {fileID: 1967695319}
   - component: {fileID: 1967695320}
   - component: {fileID: 1967695322}
+  - component: {fileID: 1967695323}
+  - component: {fileID: 1967695325}
   m_Layer: 0
   m_Name: RightHand Controller new
   m_TagString: Untagged
@@ -3333,7 +3378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab65c90579b1bb4d88dafb813df4843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTime: 0.5
+  smoothTime: 0.7
 --- !u!114 &1967695320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3346,7 +3391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13ba9d31303b2a4c9f06edf0f7dd8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTime: 0.5
+  smoothTime: 0.7
 --- !u!114 &1967695321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3383,7 +3428,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b07d125f547ba41974fb98397b9858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTime: 0.5
+  smoothTime: 0.7
+  speedThreshold: 0.5
+--- !u!114 &1967695323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967695314}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab677361de94184c96d5dbbedc1289c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothTime: 0.7
+--- !u!114 &1967695324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967695314}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c29054ecc1bddf41aa6967743ac78fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1967695325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967695314}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 027d9acc1d13be84db973ab79788d0d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothTime: 0.7
   speedThreshold: 0.5
 --- !u!1 &1993535322
 GameObject:
