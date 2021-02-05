@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 922060921ae6d7e4eac983766f8a3fdc, type: 3}
+  m_Name: Struct 3
+  m_EditorClassIdentifier: 
+  desiredStructure:
+  - position: {x: 0.13885552, y: 1.2274339, z: 0.20136331}
+    rotation: {x: -0.705173, y: 0.0047454243, z: 0.009080046, w: 0.7089613}
+    color: 1
+  - position: {x: 0.013823688, y: 1.2015845, z: 0.19887525}
+    rotation: {x: 0.5099254, y: 0.50108874, z: -0.4963941, w: -0.4924215}
+    color: 1
+  - position: {x: 0.011249781, y: 1.3499814, z: 0.19874048}
+    rotation: {x: -0.49520606, y: -0.5050954, z: 0.5038762, w: 0.49574035}
+    color: 2
+  - position: {x: 0.16317552, y: 1.1025038, z: 0.20165066}
+    rotation: {x: 0.0008735135, y: 0.7089204, z: -0.7052855, w: 0.0018908828}
+    color: 2
+  - position: {x: 0.08809316, y: 1.0776567, z: 0.20267297}
+    rotation: {x: -0.70926267, y: 0.0013545603, z: 0.00088525563, w: 0.70494246}
+    color: 0
+  - position: {x: -0.013656914, y: 1.2756113, z: 0.19843234}
+    rotation: {x: -0.49122846, y: 0.48640624, z: -0.50586486, w: 0.5159499}
+    color: 0
+  - position: {x: -0.13754576, y: 1.2276518, z: 0.20184772}
+    rotation: {x: 0.0029409379, y: -0.70613074, z: -0.7080738, w: -0.001495637}
+    color: 2
+  - position: {x: -0.16251743, y: 1.1024941, z: 0.1994674}
+    rotation: {x: 0.70739055, y: 0.004616581, z: -0.0014067069, w: 0.7068065}
+    color: 1
+  - position: {x: -0.087415695, y: 1.0775216, z: 0.20019107}
+    rotation: {x: 0.000054448843, y: -0.7080275, z: -0.7061836, w: -0.0013626441}
+    color: 0
+  blueprint: {fileID: 0}

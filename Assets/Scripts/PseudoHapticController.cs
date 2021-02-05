@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PseudoHapticController : Controller
 {
-    
     private Vector3 _lastPosition;
     private Quaternion _lastRotation;
     protected Vector3 deltaPosition;

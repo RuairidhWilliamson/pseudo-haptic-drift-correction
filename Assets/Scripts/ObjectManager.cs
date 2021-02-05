@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class ObjectManager : MonoBehaviour
@@ -28,6 +29,7 @@ public class ObjectManager : MonoBehaviour
 
     public static void ResetObjects()
     {
+        if (_instance is null) return;
         _instance._objects.ForEach(el =>
         {
             (Rigidbody rb, Vector3 position, Quaternion rotation) = el;
