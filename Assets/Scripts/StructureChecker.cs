@@ -10,8 +10,7 @@ public class StructureChecker : MonoBehaviour
 {
     [SerializeField] private Vector3 size;
     public static StructureChecker Instance;
-    private readonly Collider[] _blocks = new Collider[20];
-
+    private readonly Collider[] _blocks = new Collider[50];
     
     [SerializeField] private float maxDistance;
     [SerializeField] private float maxAngle;
@@ -20,6 +19,7 @@ public class StructureChecker : MonoBehaviour
     [SerializeField] private Transform structureDisplay;
 
     private List<Transform> _displayBlocks = new List<Transform>();
+    private static readonly int Active = Shader.PropertyToID("_Active");
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class StructureChecker : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(Check), 10f, 1f);
+        InvokeRepeating(nameof(Check), 2f, 1f);
     }
 
     private void Check()
@@ -81,20 +81,31 @@ public class StructureChecker : MonoBehaviour
 
     private bool CheckStructure()
     {
+        if (desired is null) return false;
         int count = Physics.OverlapBoxNonAlloc(transform.position, size / 2, _blocks);
+        for (int i = 0; i < count; i++)
+        {
+            Collider col = _blocks[i];
+            MeshRenderer mr = col.GetComponent<MeshRenderer>();
+            mr?.material.SetFloat(Active, 0f);
+        }
+
+        bool result = true;
         foreach (DesiredStructure.Block t in desired.desiredStructure)
         {
             if (!IsThereBlock(t, count))
             {
-                return false;
+                result = false;
             }
         }
-
-        return true;
+        return result;
     }
 
     private bool IsThereBlock(DesiredStructure.Block block, int count)
     {
+        bool result = false;
+        Collider closestCol = null;
+        float smallestError = Mathf.Infinity;
         for (int j = 0; j < count; j++)
         {
             Collider col = _blocks[j];
@@ -103,11 +114,23 @@ public class StructureChecker : MonoBehaviour
             float angle = Quaternion.Angle(block.rotation, col.transform.rotation);
             if (distance < maxDistance && angle < maxAngle)
             {
-                return true;
+                float error = distance / maxDistance + angle / maxAngle;
+                if (smallestError > error)
+                {
+                    closestCol = col;
+                    smallestError = error;
+                }
+                result = true;
             }
         }
 
-        return false;
+        if (result)
+        {
+            MeshRenderer mr = closestCol.GetComponent<MeshRenderer>();
+            mr.material.SetFloat(Active, 1f);
+        }
+
+        return result;
     }
 
     public void DisplayStructure()

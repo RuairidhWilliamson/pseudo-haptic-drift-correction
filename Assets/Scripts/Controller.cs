@@ -156,10 +156,10 @@ public class Controller : MonoBehaviour
         RealRotation = GetRotation();
         if (GetRecenter())
         {
-            Vector3 position = -_controllerData.rig.cameraGameObject.transform.localPosition;
-            position -= Vector3.up * Vector3.Dot(position, Vector3.up);
-            _controllerData.rig.cameraFloorOffsetObject.transform.position = position;
-            var _hmd = InputDevices.GetDeviceAtXRNode(XRNode.Head);
+            // Vector3 position = -_controllerData.rig.cameraGameObject.transform.localPosition;
+            // position -= Vector3.up * Vector3.Dot(position, Vector3.up);
+            // _controllerData.rig.cameraFloorOffsetObject.transform.position = position;
+            // var _hmd = InputDevices.GetDeviceAtXRNode(XRNode.Head);
             
             // Vector3 direction = Vector3.ProjectOnPlane(_controllerData.rig.cameraGameObject.transform.forward, Vector3.up);
             // Quaternion rotation = Quaternion.FromToRotation(direction, Vector3.forward);

@@ -14,5 +14,5 @@ public class DesiredStructure : ScriptableObject
         public int color;
     }
     public Block[] desiredStructure;
-    public Texture2D blueprint;
+    public new string name;
 }

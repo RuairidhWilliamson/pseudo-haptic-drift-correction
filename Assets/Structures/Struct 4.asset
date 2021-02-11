@@ -40,4 +40,4 @@ MonoBehaviour:
   - position: {x: -0.1585266, y: 1.0775601, z: 0.20599084}
     rotation: {x: -0.7075266, y: 0.0012321249, z: 0.0034006983, w: 0.7066775}
     color: 0
-  blueprint: {fileID: 0}
+  name: D
