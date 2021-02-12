@@ -37,6 +37,7 @@ public class ExperimentManager : MonoBehaviour
     private int _explanationIndex = 0;
     private bool _started = false;
     private bool _primaryWasPressed = false;
+    private float _lastPressTime = 0f;
     private InputDevice _leftController;
     private InputDevice _rightController;
     public float[] masses;
@@ -148,7 +149,7 @@ public class ExperimentManager : MonoBehaviour
     {
         
         logger.LogDifficultyOfTask(_testIndex, x);
-        heavyObject.SetActive(true);
+        lightObject.SetActive(true);
         taskDifficulty.SetActive(false);
     }
 
@@ -156,7 +157,7 @@ public class ExperimentManager : MonoBehaviour
     {
         logger.LogHeaviestBlock(_testIndex, x);
         heavyObject.SetActive(false);
-        lightObject.SetActive(true);
+        taskDifficulty.SetActive(true);
     }
 
     public void LightestBlock(int x)
@@ -205,7 +206,9 @@ public class ExperimentManager : MonoBehaviour
 
         if (GetPrimaryButton(_leftController) || GetPrimaryButton(_rightController))
         {
+            if (Time.time < _lastPressTime + 2f) return;
             if (_primaryWasPressed) return;
+            _lastPressTime = Time.time;
             if (!_started)
             {
                 if (_explanationIndex < explanation.Length)
@@ -223,7 +226,7 @@ public class ExperimentManager : MonoBehaviour
             {
                 _waitingUserContinue = false;
                 _userQuestions = true;
-                taskDifficulty.SetActive(true);
+                heavyObject.SetActive(true);
                 foreach (var go in blockControllers)
                 {
                     go.SetActive(false);
@@ -246,7 +249,7 @@ public class ExperimentManager : MonoBehaviour
 
     private void EndExperiment()
     {
-        textBox.text = "You have completed the experiment. Thank you for participating.";
+        textBox.text = $"You have completed the experiment. Thank you for participating.\n{logger.ParticipantID}";
         logger.LogEnd();
         logger.UploadLogs();
     }

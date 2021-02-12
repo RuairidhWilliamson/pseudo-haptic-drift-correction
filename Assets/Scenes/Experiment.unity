@@ -274,7 +274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &24785312
 RectTransform:
   m_ObjectHideFlags: 0
@@ -631,8 +631,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 0.7, y: 0.5, z: 0.5}
-  maxDistance: 0.1
-  maxAngle: 45
+  maxDistance: 0.05
+  maxAngle: 30
   desired: {fileID: 0}
   displayBlock: {fileID: 9108245184342172635, guid: c6fb6e1efaabd884e88d13a0c7bdc630, type: 3}
   structureDisplay: {fileID: 2001043461}
@@ -1593,7 +1593,7 @@ MonoBehaviour:
     Press
     A or X to continue.'
   masses:
-  - 0.85
+  - 0.8
   - 1
   - 1.3
 --- !u!4 &208474460
@@ -3318,7 +3318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hmd: {fileID: 144309988}
   logIntervals: 0.5
-  loggingMode: 0
+  loggingMode: 1
 --- !u!1 &814388840
 GameObject:
   m_ObjectHideFlags: 0
