@@ -22,6 +22,7 @@ public class ExperimentManager : MonoBehaviour
     [SerializeField] private GameObject[] controllersObjects;
     [SerializeField] private TMP_Text textBox;
     [SerializeField] private TMP_Text debugTextBox;
+    [SerializeField] private TMP_Text idTextBox;
     [SerializeField] private Logger logger;
     [SerializeField] private GameObject taskDifficulty;
     [SerializeField] private GameObject heavyObject;
@@ -43,12 +44,25 @@ public class ExperimentManager : MonoBehaviour
     public float[] masses;
     private Random _random = new Random();
     
-    private Type[] _modes =
+    private Type[] _testingModes =
     {
         typeof(RealignOnRelease),
         typeof(RealignWhenOutOfView),
         typeof(SlowRealignContinuous),
         typeof(SlowRealignWhenMoving),
+    };
+    
+    private readonly Type[] _allModes =
+    {
+        typeof(NonPseudoHaptic), 
+        typeof(RealignOnButton),
+        typeof(RealignOnRelease),
+        typeof(RealignWhenOutOfView),
+        typeof(SlowRealignOnRelease), 
+        typeof(SlowRealignContinuous),
+        typeof(SlowRealignWhenMoving),
+        typeof(SlowRealignWhenOutOfView),
+        typeof(SlowRealignWhenMovingAndRealignWhenOutOfView)
     };
     private int _testIndex;
     
@@ -62,12 +76,12 @@ public class ExperimentManager : MonoBehaviour
         _leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
         _rightController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
         structures = structures.OrderBy(x => _random.Next()).ToArray();
-        _modes = _modes.OrderBy(x => _random.Next()).ToArray();
+        _testingModes = _testingModes.OrderBy(x => _random.Next()).ToArray();
         
         _controllers = new List<Controller>();
         foreach (GameObject obj in controllersObjects)
         {
-            foreach (Type component in _modes)
+            foreach (Type component in _allModes)
             {
                 Controller c = (Controller) obj.GetComponent(component);
                 if (c != null)
@@ -78,15 +92,16 @@ public class ExperimentManager : MonoBehaviour
         }
         foreach (var go in blockControllers)
         {
-            go.SetActive(false);
+            go.SetActive(true);
         }
 
         foreach (var go in uiControllers)
         {
-            go.SetActive(true);
+            go.SetActive(false);
         }
-
+        Switch(typeof(NonPseudoHaptic));
         textBox.text = "Press A or X to start.";
+        idTextBox.text = $"Participant ID:\n{logger.ParticipantID}";
     }
 
     private void StartExperiment()
@@ -101,7 +116,7 @@ public class ExperimentManager : MonoBehaviour
         _waitingUserContinue = false;
         _userQuestions = false;
         BlockSpawner.Instance.ClearBlocks();
-        if (_testIndex >= Math.Min(structures.Length, _modes.Length))
+        if (_testIndex >= Math.Min(structures.Length, _testingModes.Length))
         {
             EndExperiment();
             return;
@@ -118,10 +133,10 @@ public class ExperimentManager : MonoBehaviour
         masses = masses.OrderBy(x => _random.Next()).ToArray();
         StructureChecker.Instance.desired = structures[_testIndex];
         StructureChecker.Instance.DisplayStructure();
-        Switch(_modes[_testIndex]);
+        Switch(_testingModes[_testIndex]);
         textBox.text = "Build the structure on the grey plate based on the diagram.";
-        logger.LogStartTest(_testIndex, _modes[_testIndex].Name, structures[_testIndex].name,string.Join(",", masses));
-        debugTextBox.text = $"{GetAcronym(_modes[_testIndex].Name)}\n{_modes[_testIndex].Name}\n{string.Join(",", masses)}";
+        logger.LogStartTest(_testIndex, _testingModes[_testIndex].Name, structures[_testIndex].name,string.Join(",", masses));
+        debugTextBox.text = $"{GetAcronym(_testingModes[_testIndex].Name)}\n{_testingModes[_testIndex].Name}\n{string.Join(",", masses)}";
     }
 
     private string GetAcronym(string input)
@@ -249,7 +264,7 @@ public class ExperimentManager : MonoBehaviour
 
     private void EndExperiment()
     {
-        textBox.text = $"You have completed the experiment. Thank you for participating.\n{logger.ParticipantID}";
+        textBox.text = $"You have completed the experiment. Thank you for participating.";
         logger.LogEnd();
         logger.UploadLogs();
     }
