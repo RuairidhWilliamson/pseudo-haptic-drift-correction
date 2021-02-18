@@ -27,6 +27,7 @@ public class ExperimentManager : MonoBehaviour
     [SerializeField] private GameObject taskDifficulty;
     [SerializeField] private GameObject heavyObject;
     [SerializeField] private GameObject lightObject;
+    [SerializeField] private GameObject realisticMovement;
     [SerializeField] private GameObject[] uiControllers;
     [SerializeField] private GameObject[] blockControllers;
     [SerializeField] private XRRig rig;
@@ -35,6 +36,7 @@ public class ExperimentManager : MonoBehaviour
     private List<Controller> _controllers;
     private bool _waitingUserContinue = false;
     private bool _userQuestions = false;
+    private bool _experimentRunning = false;
     private int _explanationIndex = 0;
     private bool _started = false;
     private bool _primaryWasPressed = false;
@@ -73,6 +75,7 @@ public class ExperimentManager : MonoBehaviour
 
     private void Start()
     {
+        _experimentRunning = true;
         _leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
         _rightController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
         structures = structures.OrderBy(x => _random.Next()).ToArray();
@@ -179,8 +182,16 @@ public class ExperimentManager : MonoBehaviour
     {
         logger.LogLightestBlock(_testIndex, x);
         lightObject.SetActive(false);
+        realisticMovement.SetActive(true);
+    }
+
+    public void RealisticOfMoving(int x)
+    {
+        logger.LogRealisticOfMoving(_testIndex, x);
+        realisticMovement.SetActive(false);
         _testIndex++;
         StartTest();
+        
     }
 
     private static bool GetPrimaryButton(InputDevice inputDevice)
@@ -207,6 +218,7 @@ public class ExperimentManager : MonoBehaviour
 
     private void Update()
     {
+        if (!_experimentRunning) return;
         if (Keyboard.current.sKey.wasPressedThisFrame)
         {
             EndTest();
@@ -264,6 +276,7 @@ public class ExperimentManager : MonoBehaviour
 
     private void EndExperiment()
     {
+        _experimentRunning = false;
         textBox.text = $"You have completed the experiment. Thank you for participating.";
         logger.LogEnd();
         logger.UploadLogs();

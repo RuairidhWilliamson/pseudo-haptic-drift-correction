@@ -383,6 +383,12 @@ public class Logger : MonoBehaviour
         string eventDescription = $"The subject stated that in task {index} {value} was the lightest";
         LogEvent("QL", eventDescription);
     }
+
+    public void LogRealisticOfMoving(int index, int value)
+    {
+        string eventDescription = $"The subject stated that task {index} was {value} in realism";
+        LogEvent("QR", eventDescription);
+    }
     #endregion
 
     void OnApplicationQuit()
