@@ -24,10 +24,7 @@ public class ExperimentManager : MonoBehaviour
     [SerializeField] private TMP_Text debugTextBox;
     [SerializeField] private TMP_Text idTextBox;
     [SerializeField] private Logger logger;
-    [SerializeField] private GameObject taskDifficulty;
-    [SerializeField] private GameObject heavyObject;
-    [SerializeField] private GameObject lightObject;
-    [SerializeField] private GameObject realisticMovement;
+    [SerializeField] private GameObject[] questionContainers;
     [SerializeField] private GameObject[] uiControllers;
     [SerializeField] private GameObject[] blockControllers;
     [SerializeField] private XRRig rig;
@@ -41,6 +38,7 @@ public class ExperimentManager : MonoBehaviour
     private bool _started = false;
     private bool _primaryWasPressed = false;
     private float _lastPressTime = 0f;
+    private int _questionIndex;
     private InputDevice _leftController;
     private InputDevice _rightController;
     public float[] masses;
@@ -163,35 +161,42 @@ public class ExperimentManager : MonoBehaviour
         _waitingUserContinue = true;
     }
 
-    public void DifficultOfTask(int x)
+    private void ShowQuestion()
     {
-        
-        logger.LogDifficultyOfTask(_testIndex, x);
-        lightObject.SetActive(true);
-        taskDifficulty.SetActive(false);
+        for (int i = 0; i < questionContainers.Length; i++)
+        {
+            questionContainers[i].SetActive(i == _questionIndex);
+        }
     }
 
     public void HeaviestBlock(int x)
     {
         logger.LogHeaviestBlock(_testIndex, x);
-        heavyObject.SetActive(false);
-        taskDifficulty.SetActive(true);
+        _questionIndex = 1;
+        ShowQuestion();
+    }
+
+    public void DifficultOfTask(int x)
+    {
+        logger.LogDifficultyOfTask(_testIndex, x);
+        _questionIndex = 2;
+        ShowQuestion();
     }
 
     public void LightestBlock(int x)
     {
         logger.LogLightestBlock(_testIndex, x);
-        lightObject.SetActive(false);
-        realisticMovement.SetActive(true);
+        _questionIndex = 3;
+        ShowQuestion();
     }
 
     public void RealisticOfMoving(int x)
     {
         logger.LogRealisticOfMoving(_testIndex, x);
-        realisticMovement.SetActive(false);
+        _questionIndex = 4;
+        ShowQuestion();
         _testIndex++;
         StartTest();
-        
     }
 
     private static bool GetPrimaryButton(InputDevice inputDevice)
@@ -218,17 +223,17 @@ public class ExperimentManager : MonoBehaviour
 
     private void Update()
     {
-        if (!_experimentRunning) return;
-        if (Keyboard.current.sKey.wasPressedThisFrame)
-        {
-            EndTest();
-        }
-
         if (GetSecondaryButton(_leftController) || GetSecondaryButton(_rightController))
         {
             Vector3 position = -rig.cameraGameObject.transform.localPosition;
             position -= Vector3.up * Vector3.Dot(position, Vector3.up);
             rig.cameraFloorOffsetObject.transform.position = position;
+        }
+        
+        if (!_experimentRunning) return;
+        if (Keyboard.current.sKey.wasPressedThisFrame)
+        {
+            EndTest();
         }
 
         if (GetPrimaryButton(_leftController) || GetPrimaryButton(_rightController))
@@ -253,7 +258,8 @@ public class ExperimentManager : MonoBehaviour
             {
                 _waitingUserContinue = false;
                 _userQuestions = true;
-                heavyObject.SetActive(true);
+                _questionIndex = 0;
+                ShowQuestion();
                 foreach (var go in blockControllers)
                 {
                     go.SetActive(false);
