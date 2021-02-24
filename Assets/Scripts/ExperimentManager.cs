@@ -188,6 +188,7 @@ public class ExperimentManager : MonoBehaviour
         logger.LogLightestBlock(_testIndex, x);
         _questionIndex = 3;
         ShowQuestion();
+        LastQuestion();
     }
 
     public void RealisticOfMoving(int x)
@@ -195,6 +196,10 @@ public class ExperimentManager : MonoBehaviour
         logger.LogRealisticOfMoving(_testIndex, x);
         _questionIndex = 4;
         ShowQuestion();
+    }
+
+    private void LastQuestion()
+    {
         _testIndex++;
         StartTest();
     }
@@ -223,6 +228,23 @@ public class ExperimentManager : MonoBehaviour
 
     private void Update()
     {
+        
+        #if UNITY_EDITOR
+        if (Keyboard.current.iKey.wasPressedThisFrame)
+        {
+            HeaviestBlock(0);
+        }
+
+        if (Keyboard.current.oKey.wasPressedThisFrame)
+        {
+            DifficultOfTask(0);
+        }
+
+        if (Keyboard.current.pKey.wasPressedThisFrame)
+        {
+            LightestBlock(0);
+        }
+        #endif
         if (GetSecondaryButton(_leftController) || GetSecondaryButton(_rightController))
         {
             Vector3 position = -rig.cameraGameObject.transform.localPosition;
@@ -236,7 +258,7 @@ public class ExperimentManager : MonoBehaviour
             EndTest();
         }
 
-        if (GetPrimaryButton(_leftController) || GetPrimaryButton(_rightController))
+        if (GetPrimaryButton(_leftController) || GetPrimaryButton(_rightController) || Keyboard.current.aKey.wasPressedThisFrame)
         {
             if (Time.time < _lastPressTime + 2f) return;
             if (_primaryWasPressed) return;
