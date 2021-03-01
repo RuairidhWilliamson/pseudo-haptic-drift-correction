@@ -4779,7 +4779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hmd: {fileID: 144309988}
   logIntervals: 0.5
-  loggingMode: 0
+  loggingMode: 1
 --- !u!1 &814388840
 GameObject:
   m_ObjectHideFlags: 0
