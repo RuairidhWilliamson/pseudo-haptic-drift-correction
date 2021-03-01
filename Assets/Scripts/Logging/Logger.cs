@@ -178,7 +178,7 @@ public class Logger : MonoBehaviour
     /// <returns></returns>
     private string GenerateParticipantID()
     {
-        return Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Substring(0, 8);
+        return Guid.NewGuid().ToString().Substring(0, 5);
     }
 
     /// <summary>

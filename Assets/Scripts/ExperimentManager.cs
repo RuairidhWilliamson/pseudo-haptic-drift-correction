@@ -305,7 +305,7 @@ public class ExperimentManager : MonoBehaviour
     private void EndExperiment()
     {
         _experimentRunning = false;
-        textBox.text = $"You have completed the experiment. Thank you for participating.";
+        textBox.text = $"You have completed all the tasks. Please return to and complete the online form.";
         logger.LogEnd();
         logger.UploadLogs();
     }
