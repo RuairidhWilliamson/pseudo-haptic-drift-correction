@@ -1075,7 +1075,7 @@ MonoBehaviour:
   m_PoseSource: 2
   m_PoseProviderComponent: {fileID: 0}
   m_TrackingType: 0
-  m_UpdateType: 0
+  m_UpdateType: 2
   m_UseRelativeTransform: 0
 --- !u!81 &144309986
 AudioListener:
