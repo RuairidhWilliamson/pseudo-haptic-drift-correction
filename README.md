@@ -1,5 +1,7 @@
 # pseudo-haptic-drift-correction
 
+Unity 2020.2.1f1
+
 Developed primarily for the Oculus Quest
 
 ## Controls
